@@ -28,5 +28,11 @@ pipeline {
                 sh 'docker push $ECR_REGISTRY/$ECR_REPO:$IMAGE_TAG'
             }
         }
+        stage('Deploy') {
+            steps {
+                sh 'docker rm -f js-app-container || true'
+                sh 'docker run -d --name js-app-container -p 3000:3000 $ECR_REGISTRY/$ECR_REPO:$IMAGE_TAG'
+            }
+        }
     }
 }
