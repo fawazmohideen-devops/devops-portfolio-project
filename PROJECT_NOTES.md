@@ -65,3 +65,9 @@
 
 **Status:** Jenkins pulls code from GitHub + builds Docker image automatically via Jenkinsfile. ✅
 **Next:** Push image to AWS ECR, then deploy.
+- Added deploy stage: Jenkins pulls image from ECR, runs as container
+- BUG: ubuntu user got "permission denied" on docker ps → ubuntu user 
+  wasn't in docker group (only jenkins was). Fixed with sudo / usermod.
+- Full CI/CD working: code→build→push ECR→deploy. Verified container 
+  running with docker ps.
+- Note: app runs but needs MongoDB alongside (deferred to Phase 4/K8s)
